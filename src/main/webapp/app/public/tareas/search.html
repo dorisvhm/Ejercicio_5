@@ -1,0 +1,28 @@
+<div id="demo" ng-controller="searchTareasController as tareas">
+    <!-- Button (Double) -->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="ok"></label>
+        <div class="col-md-8">
+            <button id="ok" name="ok" class="btn btn-success" ng-click="tareas.search()">Buscar</button>
+            
+            <a id="new" ui-sref="public.tareas.new" class="btn btn-primary">
+                Nueva tarea
+            </a>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+            </tr>
+            <tr ng-repeat="t in tareas.tareas">
+                <td> <a ui-sref="public.tareas.edit({ id: t.id })">{{t.id}}</a></td>
+                <td>{{t.nombre}}</td>
+                <td>{{t.descripcion}}</td>
+            </tr>
+        </table>
+    </div> 
+</div>
