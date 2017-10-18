@@ -24,14 +24,17 @@ public class Tarea implements Serializable {
     @Column(length = 100)
     private String nombre;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaLimite;
-
     @Column
     private Boolean realizada;
 
     @Column(length = 1000)
     private String descripcion;
+        
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaLimite;
+    
+    @Column(length = 50)
+    private String hora;
 
     public Integer getId() {
         return this.id;
@@ -74,14 +77,6 @@ public class Tarea implements Serializable {
         this.nombre = nombre;
     }
 
-    public Date getFechaLimite() {
-        return fechaLimite;
-    }
-
-    public void setFechaLimite(Date fechaLimite) {
-        this.fechaLimite = fechaLimite;
-    }
-
     public Boolean getRealizada() {
         return realizada;
     }
@@ -98,6 +93,22 @@ public class Tarea implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }       
+
+    public Date getFechaLimite() {
+        return fechaLimite;
+    }
+
+    public void setFechaLimite(Date fechaLimite) {
+        this.fechaLimite = fechaLimite;
+    }
+  
     @Override
     public String toString() {
         String result = getClass().getSimpleName() + " ";
