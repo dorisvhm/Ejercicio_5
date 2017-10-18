@@ -6,7 +6,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.OptimisticLockException;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -40,17 +39,6 @@ public class TareaEndpoint {
                         .path(String.valueOf(entity.getId())).build()).build();
     }
 
-    @DELETE
-    @Path("/{id:[0-9][0-9]*}")
-    public Response deleteById(@PathParam("id") Integer id) {
-        Tarea entity = tareasService.findById(id);
-        if (entity == null) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-        tareasService.deleteById(id);
-        return Response.noContent().build();
-    }
-
     @GET
     @Path("/{id:[0-9][0-9]*}")
     public Response findById(@PathParam("id") Integer id) {
@@ -72,19 +60,11 @@ public class TareaEndpoint {
 
     @PUT
     @Path("/{id:[0-9][0-9]*}")
-    public Response update(@PathParam("id") Integer id, Tarea entity) {
+    public Response update(Tarea entity) {
         if (entity == null) {
             return Response.status(Status.BAD_REQUEST).build();
         }
-        if (id == null) {
-            return Response.status(Status.BAD_REQUEST).build();
-        }
-        if (!id.equals(entity.getId())) {
-            return Response.status(Status.CONFLICT).entity(entity).build();
-        }
-        if (tareasService.findById(id) == null) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
+       
         try {
             entity = tareasService.update(entity);
         } catch (OptimisticLockException e) {

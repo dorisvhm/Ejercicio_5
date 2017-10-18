@@ -21,13 +21,6 @@ public class TareaDao {
         em.persist(entity);
     }
 
-    public void deleteById(Integer id) {
-        Tarea entity = em.find(Tarea.class, id);
-        if (entity != null) {
-            em.remove(entity);
-        }
-    }
-
     public Tarea findById(Integer id) {
         return em.find(Tarea.class, id);
     }

@@ -22,7 +22,6 @@
                 <th>Fecha y Hora Límite</th>
             </tr>
             <tr ng-repeat="t in tareas.tareas">
-                <td> <a ui-sref="public.tareas.edit({ id: t.id })">{{t.id}}</a></td>
                 <td>{{t.nombre}}</td>
                 <td>{{t.descripcion}}</td>
                 <td>{{t.fechaLimite | date : "dd/MM/yyyy hh:mm a"}}</td>
