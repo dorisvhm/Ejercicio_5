@@ -54,36 +54,17 @@ module.controller('editTareasController', function ($scope, $log, $stateParams, 
         var errorCallback = function(responseHeaders) {
             $log.error('error while persisting');
         };
-
-         //tareasResource.update($scope.tareas, successCallback, errorCallback);
          
          $scope.tareas.$update(successCallback, errorCallback);
 
     };
-    
-    $scope.delete = function () {
-
-        var successCallback = function(data, responseHeaders) {
-            $log.info('removed successfuly ' + data);
-            $location.path('/tareas');
-        };
-
-        var errorCallback = function(responseHeaders) {
-            $log.error('error while persisting');
-        };
-
-         //tareasResource.update($scope.tareas, successCallback, errorCallback);
-         
-         $scope.tareas.$remove(successCallback, errorCallback);
-
-    };
-    
+        
     $scope.get();
 
 });
 
-module.controller('newTareasController', function ($scope, $log, tareasResource) {
-
+module.controller('newTareasController', function ($scope, $log, $location, tareasResource) {
+     $scope.location = $location.path();
     $scope.tareas = {};
 
     $scope.save = function () {
@@ -101,8 +82,9 @@ module.controller('newTareasController', function ($scope, $log, tareasResource)
 
     };
     
+    
     $scope.cancel = function () {
-        $scope.tareas = {};
+        $location.path('/tareas');
     };
 
 });

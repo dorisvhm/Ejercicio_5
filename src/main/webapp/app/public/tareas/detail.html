@@ -5,19 +5,7 @@
             <!-- Form Name -->
             <legend>Tareas</legend>
             <!-- Text input-->
-            <div class="form-group" ng-class="{ 'has-error': nabform.id.$invalid }">
-                <label class="col-md-4 control-label" for="id">Id Tarea</label>  
-                <div class="col-md-4">
-                    <input id="id" name="id" ng-model="tareas.id" placeholder="13" class="form-control input-md" ng-disabled="true" type="text" />
-                </div>
-            </div>
-            <!-- Text input-->
             
-
-
-
-
-
             <!-- Text input-->
             <div class="form-group" ng-class="{ 'has-error': nabform.nombre.$invalid }">
                 <label class="col-md-4 control-label" for="nombre">Nombre</label>  
@@ -26,7 +14,7 @@
 
                 </div>
             </div>
-            
+
             <div class="form-group" ng-class="{ 'has-error': nabform.descripcion.$invalid }">
                 <label class="col-md-4 control-label" for="descripcion">Descripción</label>  
                 <div class="col-md-4">
@@ -35,15 +23,19 @@
                 </div>
             </div>
 
-           
+
 
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="ok"></label>
                 <div class="col-md-8">
                     <button id="ok" name="ok" class="btn btn-success" ng-click="save()" ng-disabled="nabform.$invalid">Aceptar</button>
-                    <button id="cancel" name="cancel" class="btn btn-danger" ng-click="cancel()">Cancelar</button>
-                    <button ng-if="location != null" id="remove" name="cancel" class="btn btn-danger" ng-click="delete()">Eliminar</button>
+                    
+                    <a id="cancel" ui-sref="public.tareas" class="btn btn-danger">
+                        Cancelar
+                    </a>
+
+
                 </div>
             </div>
 
