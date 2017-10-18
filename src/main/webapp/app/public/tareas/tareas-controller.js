@@ -4,9 +4,8 @@ var module = angular.module('mpApp.public');
 
 module.controller('searchTareasController', function ($scope, $log, tareasResource) {
     var pc = this;
-
-
     pc.tareas = [];
+
 
     pc.search = function () {
         var successCallback = function (data, responseHeaders) {
@@ -20,21 +19,33 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
         tareasResource.queryAll({"max": 100}, successCallback, errorCallback);
     };
 
-    pc.delete = function (id) {
+    pc.update = function (tarea) {
+                
+        var successCallback = function (data, responseHeaders) {
+            $log.info('updating successfuly ' + data);
+            
+        };
+
+        var errorCallback = function (responseHeaders) {
+            $log.error('error while persisting');
+        };
+        
+       tareasResource.update(tarea, successCallback, errorCallback)
 
     };
 
     pc.search();
 });
 
+
 module.controller('newTareasController', function ($scope, $log, $location, tareasResource) {
     $scope.location = $location.path();
     $scope.tareas = {};
-    
+
     $scope.save = function () {
 
         var horas = new Date($scope.tareas.hora);
-       
+
         $scope.tareas.fechaLimite.setHours(horas.getHours());
         $scope.tareas.fechaLimite.setMinutes(horas.getMinutes());
 

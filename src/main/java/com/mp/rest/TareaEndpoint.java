@@ -59,7 +59,6 @@ public class TareaEndpoint {
     }
 
     @PUT
-    @Path("/{id:[0-9][0-9]*}")
     public Response update(Tarea entity) {
         if (entity == null) {
             return Response.status(Status.BAD_REQUEST).build();

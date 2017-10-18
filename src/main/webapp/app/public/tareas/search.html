@@ -14,18 +14,24 @@
     <br/>
     <hr />
     <div>
+
         <table class="table">
             <tr>
-                <th>Id</th>
+                <th></th>
                 <th>Tarea</th>
-                <th>Descripción</th>
                 <th>Fecha y Hora Límite</th>
+                <th></th>
             </tr>
             <tr ng-repeat="t in tareas.tareas">
+
+                <td><input type="checkbox" ng-model="t.realizada" ng-change="tareas.update(t)"></td>
+
+
                 <td>{{t.nombre}}</td>
-                <td>{{t.descripcion}}</td>
-                <td>{{t.fechaLimite | date : "dd/MM/yyyy hh:mm a"}}</td>
+                <td>{{t.fechaLimite| date : "dd/MM/yyyy hh:mm a"}}</td>
+
             </tr>
         </table>
-    </div> 
+
+    </div>
 </div>
