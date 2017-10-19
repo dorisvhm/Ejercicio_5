@@ -27,6 +27,7 @@ public class TareaDao {
             em.remove(entity);
         }
     }
+    
 
     public Tarea update(Tarea entity) {
         return em.merge(entity);

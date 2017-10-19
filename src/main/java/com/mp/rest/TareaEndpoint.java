@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import com.mp.model.Tarea;
 import javax.inject.Inject;
+import javax.ws.rs.PathParam;
 
 /**
  *
@@ -45,7 +46,7 @@ public class TareaEndpoint {
         final List<Tarea> results = tareasService.listAll(startPosition, maxResult);
         return results;
     }
-
+    
     @PUT
     public Response update(Tarea entity) {
         if (entity == null) {
@@ -63,7 +64,7 @@ public class TareaEndpoint {
     }
 
     @GET
-    @Path("/{idCategoria:[0-9][0-9]*}")
+    @Path("/categoria/{idCategoria:[0-9][0-9]*}")
     public List<Tarea> listByIdCategoria(@QueryParam("idCategoria") Integer idCategoria) {
 
         final List<Tarea> results = tareasService.listByCategoria(idCategoria);
@@ -71,7 +72,7 @@ public class TareaEndpoint {
     }
 
     @GET
-    @Path("/{texto}")
+    @Path("/texto/{texto}")
     public List<Tarea> listByTexto(@QueryParam("texto") String texto) {
 
         final List<Tarea> results = tareasService.listByTexto(texto);

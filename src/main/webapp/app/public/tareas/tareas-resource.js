@@ -9,10 +9,6 @@ module.factory('tareasResource', function ($resource, comm) {
             method: 'GET',
             isArray: true
         },
-        'query' : {
-                method : 'GET',
-                isArray : false
-        },
         'update' : {
             method : 'PUT'
         },
