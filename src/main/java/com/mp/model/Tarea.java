@@ -29,12 +29,14 @@ public class Tarea implements Serializable {
 
     @Column(length = 1000)
     private String descripcion;
-        
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaLimite;
-    
-    @Column(length = 50)
-    private String hora;
+
+    @Column
+    private Integer idCategoria;
+
+    private String categoria;
 
     public Integer getId() {
         return this.id;
@@ -93,22 +95,43 @@ public class Tarea implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }       
-
     public Date getFechaLimite() {
         return fechaLimite;
+    }
+
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public void setFechaLimite(Date fechaLimite) {
         this.fechaLimite = fechaLimite;
     }
-  
+
+    public String getCategoria() {
+
+        switch (idCategoria) {
+            case 1:
+                categoria = "TAREAS DOMESTICAS";
+                break;
+            case 2:
+                categoria = "JAVA";
+                break;
+            case 3:
+                categoria = "SISTEMAS OPERATIVOS";
+                break;
+        }
+
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString() {
         String result = getClass().getSimpleName() + " ";

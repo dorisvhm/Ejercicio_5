@@ -3,7 +3,7 @@ var module = angular.module('mpApp.public');
 
 module.factory('tareasResource', function ($resource, comm) {
     return $resource(comm.url + '/tareas', {
-            
+          
         }, {
         'queryAll': {
             method: 'GET',
@@ -15,6 +15,14 @@ module.factory('tareasResource', function ($resource, comm) {
         },
         'update' : {
             method : 'PUT'
+        },
+        'queryByCategoria': {
+            method: 'GET',
+            isArray: true
+        },
+        'queryByTexto': {
+            method: 'GET',
+            isArray: true
         }
     });
 });

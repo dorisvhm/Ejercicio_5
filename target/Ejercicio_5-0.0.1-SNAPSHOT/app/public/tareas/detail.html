@@ -1,4 +1,4 @@
-<div id="demo" >    
+<div id="demo">    
     <form name="nabform" class="form-horizontal">
         <fieldset>
 
@@ -26,19 +26,19 @@
             <div class="form-group" ng-class="{ 'has-error': nabform.fechaLimite.$invalid }">
                 <label class="col-md-4 control-label" for="fecha">Fecha Límite:</label>  
                 <div class="col-md-4">
-                    <input type="date" id="fecha" name="input" ng-model="tareas.fechaLimite" class="form-control input-md"/>
-                    
-                </div>
-            </div>
-            
-            <div class="form-group" ng-class="{ 'has-error': nabform.hora.$invalid }">
-                <label class="col-md-4 control-label" for="hora">Hora Limite:</label>  
-                <div class="col-md-4">
-                    <input type="time" id="hora" name="input" ng-model="tareas.hora" class="form-control input-md"/>
-                    
+                    <input type="datetime-local" id="fecha" name="input" ng-model="tareas.fechaLimite" class="form-control input-md"/>                    
                 </div>
             </div>
 
+            <div class="form-group" ng-class="{ 'has-error': nabform.fechaLimite.$invalid }">
+                <label class="col-md-4 control-label" for="fecha">Categoría:</label>  
+                <div class="col-md-4">     
+
+                    <select name="multipleSelect" id="multipleSelect" ng-model="categoriaSelected"  single class="form-control input-md"
+                            ng-options="cat.llave as cat.valor for cat in categorias">
+                    </select>   
+                </div>
+            </div>
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="ok"></label>

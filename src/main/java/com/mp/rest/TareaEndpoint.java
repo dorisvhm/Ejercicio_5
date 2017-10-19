@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.OptimisticLockException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -36,24 +37,13 @@ public class TareaEndpoint {
         tareasService.create(entity);
 
         return Response.created(UriBuilder.fromResource(TareaEndpoint.class)
-                        .path(String.valueOf(entity.getId())).build()).build();
-    }
-
-    @GET
-    @Path("/{id:[0-9][0-9]*}")
-    public Response findById(@PathParam("id") Integer id) {
-
-        Tarea entity = tareasService.findById(id);
-        if (entity == null) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-        return Response.ok(entity).build();
+                .path(String.valueOf(entity.getId())).build()).build();
     }
 
     @GET
     public List<Tarea> listAll(@QueryParam("start") Integer startPosition,
             @QueryParam("max") Integer maxResult) {
-        
+
         final List<Tarea> results = tareasService.listAll(startPosition, maxResult);
         return results;
     }
@@ -63,7 +53,7 @@ public class TareaEndpoint {
         if (entity == null) {
             return Response.status(Status.BAD_REQUEST).build();
         }
-       
+
         try {
             entity = tareasService.update(entity);
         } catch (OptimisticLockException e) {
@@ -73,4 +63,21 @@ public class TareaEndpoint {
 
         return Response.ok(entity).build();
     }
+
+    @GET
+    @Path("/{idCategoria:[0-9][0-9]*}")
+    public List<Tarea> listByIdCategoria(@QueryParam("idCategoria") Integer idCategoria) {
+
+        final List<Tarea> results = tareasService.listByCategoria(idCategoria);
+        return results;
+    }
+
+    @GET
+    @Path("/{texto}")
+    public List<Tarea> listByTexto(@QueryParam("texto") String texto) {
+
+        final List<Tarea> results = tareasService.listByTexto(texto);
+        return results;
+    }
+
 }
