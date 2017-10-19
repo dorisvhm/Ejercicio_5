@@ -58,8 +58,19 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
         tareasResource.queryByTexto({"texto": texto}, successCallback, errorCallback);
 
     };
+    
+    pc.update = function (tarea) {
 
-    pc.delete = function (id) {
+        var successCallback = function (data, responseHeaders) {
+            $log.info('updating successfuly ' + data);
+
+        };
+
+        var errorCallback = function (responseHeaders) {
+            $log.error('error while persisting');
+        };
+
+        tareasResource.update(tarea, successCallback, errorCallback)
 
     };
 

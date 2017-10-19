@@ -49,16 +49,11 @@ public class TareaEndpoint {
     }
 
     @PUT
-    public Response update(@PathParam("id") Integer id, Tarea entity) {
+    public Response update(Tarea entity) {
         if (entity == null) {
             return Response.status(Status.BAD_REQUEST).build();
         }
-        if (id == null) {
-            return Response.status(Status.BAD_REQUEST).build();
-        }
-        if (!id.equals(entity.getId())) {
-            return Response.status(Status.CONFLICT).entity(entity).build();
-        }        
+
         try {
             entity = tareasService.update(entity);
         } catch (OptimisticLockException e) {

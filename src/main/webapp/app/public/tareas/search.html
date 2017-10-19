@@ -45,12 +45,14 @@
                     <div id="demo">
                         <table class="table" style="width: 100%">
                             <tr>
+                                <th></th>
                                 <th>Tarea</th>
                                 <th>Descripción</th>
                                 <th>Fecha y Hora Límite</th>
                                 <th>Categoría</th>
                             </tr>
                             <tr ng-repeat="t in tareas.tareas">
+                                <td><input type="checkbox" ng-model="t.realizada" ng-change="tareas.update(t)"></td>
                                 <td>{{t.nombre}}</td>
                                 <td>{{t.descripcion}}</td>
                                 <td>{{t.fechaLimite| date : "dd/MM/yyyy hh:mm a"}}</td>
