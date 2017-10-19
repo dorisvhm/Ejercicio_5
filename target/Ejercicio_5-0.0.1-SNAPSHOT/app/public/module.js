@@ -34,17 +34,6 @@ module.config(function ($urlRouterProvider, $stateProvider) {
         },
     });
 
-    $stateProvider.state('public.tareas.edit', {
-        url: '/update/:id',
-        views: {
-            "root@app": {
-                templateUrl: 'app/public/tareas/detail.html',
-                controller: 'editTareasController'
-            }
-        }
-
-    });
-
     $stateProvider.state('public.tareas.new', {
         url: '/new',
         views: {
@@ -55,5 +44,6 @@ module.config(function ($urlRouterProvider, $stateProvider) {
         }
 
     });
+   
 
 });

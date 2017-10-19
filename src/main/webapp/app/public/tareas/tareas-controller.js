@@ -5,7 +5,7 @@ module.controller('getCategoriasController', function ($scope) {
 
 });
 
-module.controller('searchTareasController', function ($scope, $log, tareasResource) {
+module.controller('searchTareasController', function ($scope, $log, tareasResource, $uibModal) {
     var pc = this;
     pc.textoBusqueda;
 
@@ -58,7 +58,7 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
         tareasResource.queryByTexto({"texto": texto}, successCallback, errorCallback);
 
     };
-    
+
     pc.update = function (tarea) {
 
         var successCallback = function (data, responseHeaders) {
@@ -74,8 +74,35 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
 
     };
 
+
+    pc.open = function (tarea) {
+        
+        pc.descripcion = tarea.descipcion;
+
+        $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title-top',
+            ariaDescribedBy: 'modal-body-top',
+            templateUrl: './app/public/tareas/modal.html',
+            size: 'sm',
+            controller: function ($scope, $uibModalInstance) {
+
+                $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
+                
+                $scope.descripcio = "hOLA";
+
+            }
+        });
+    };
+
+
+
     pc.search();
 });
+
+
 
 
 module.controller('editTareasController', function ($scope, $log, $stateParams, $location, tareasResource) {
