@@ -37,41 +37,18 @@ public class TareaEndpoint {
         tareasService.create(entity);
 
         return Response.created(UriBuilder.fromResource(TareaEndpoint.class)
-                        .path(String.valueOf(entity.getId())).build()).build();
-    }
-
-    @DELETE
-    @Path("/{id:[0-9][0-9]*}")
-    public Response deleteById(@PathParam("id") Integer id) {
-        Tarea entity = tareasService.findById(id);
-        if (entity == null) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-        tareasService.deleteById(id);
-        return Response.noContent().build();
-    }
-
-    @GET
-    @Path("/{id:[0-9][0-9]*}")
-    public Response findById(@PathParam("id") Integer id) {
-
-        Tarea entity = tareasService.findById(id);
-        if (entity == null) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-        return Response.ok(entity).build();
+                .path(String.valueOf(entity.getId())).build()).build();
     }
 
     @GET
     public List<Tarea> listAll(@QueryParam("start") Integer startPosition,
             @QueryParam("max") Integer maxResult) {
-        
+
         final List<Tarea> results = tareasService.listAll(startPosition, maxResult);
         return results;
     }
 
     @PUT
-    @Path("/{id:[0-9][0-9]*}")
     public Response update(@PathParam("id") Integer id, Tarea entity) {
         if (entity == null) {
             return Response.status(Status.BAD_REQUEST).build();
@@ -81,10 +58,7 @@ public class TareaEndpoint {
         }
         if (!id.equals(entity.getId())) {
             return Response.status(Status.CONFLICT).entity(entity).build();
-        }
-        if (tareasService.findById(id) == null) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
+        }        
         try {
             entity = tareasService.update(entity);
         } catch (OptimisticLockException e) {
@@ -94,4 +68,21 @@ public class TareaEndpoint {
 
         return Response.ok(entity).build();
     }
+
+    @GET
+    @Path("/{idCategoria:[0-9][0-9]*}")
+    public List<Tarea> listByIdCategoria(@QueryParam("idCategoria") Integer idCategoria) {
+
+        final List<Tarea> results = tareasService.listByCategoria(idCategoria);
+        return results;
+    }
+
+    @GET
+    @Path("/{texto}")
+    public List<Tarea> listByTexto(@QueryParam("texto") String texto) {
+
+        final List<Tarea> results = tareasService.listByTexto(texto);
+        return results;
+    }
+
 }
