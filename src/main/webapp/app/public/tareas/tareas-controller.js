@@ -12,7 +12,7 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
     $scope.listaCategorias = [{llave: "1", valor: "TAREAS DOMESTICAS"}, {llave: "2", valor: "JAVA"}, {llave: "3", valor: "SISTEMAS OPERATIVOS"}];
 
     pc.tareas = [];
-    
+
     pc.tarea = [];
 
     pc.search = function () {
@@ -90,9 +90,29 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
             controllerAs: pc,
             controller: function ($scope, $uibModalInstance) {
 
-                $scope.descripcio = pc.tarea.descripcion;
+                $scope.tarea = pc.tarea;
+                $scope.descrip = $scope.tarea.descripcion;
+                $scope.actualizar = function (descrip) {
 
-                $scope.cancel = function () {
+                    $scope.tarea.descripcion = descrip;
+                    var successCallback = function (data, responseHeaders) {
+                        $log.info('updating successfuly ' + data);
+
+                    };
+
+                    var errorCallback = function (responseHeaders) {
+                        $log.error('error while persisting');
+                    };
+
+                    tareasResource.update($scope.tarea, successCallback, errorCallback)
+
+                    $uibModalInstance.dismiss('cancel');
+                };
+
+                $scope.cerrar = function () {
+
+
+
                     $uibModalInstance.dismiss('cancel');
                 };
 
