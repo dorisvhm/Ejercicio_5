@@ -155,5 +155,16 @@ module.controller('newTareasController', function ($scope, $log, $location, tare
     $scope.cancel = function () {
         $location.path('/tareas');
     };
+    
+   
+
+    $scope.isOpen = false;
+
+    $scope.openCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $scope.isOpen = true;
+    };
 
 });
