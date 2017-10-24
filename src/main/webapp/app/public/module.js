@@ -44,6 +44,22 @@ module.config(function ($urlRouterProvider, $stateProvider) {
         }
 
     });
-   
+
+    $stateProvider.state('public.tareas.search.texto', {
+        url: '/search/:texto'
+    });
+
+
+    $stateProvider.state('public.tareas.search.texto', {
+        url: '/search/:texto',
+        views: {
+            "root@app": {
+                templateUrl: 'app/public/tareas/search.html',
+                controller: 'searchTareasController'
+            }
+        }
+
+    });
+
 
 });

@@ -11,11 +11,15 @@ module.factory('tareasResource', function ($resource, comm) {
         },
         'update' : {
             method : 'PUT'
-        },
-        'queryByCategoria': {
-            method: 'GET',
-            isArray: true
-        },
+        }
+    });
+});
+
+
+module.factory('searchByTextoResource', function ($resource, comm) {
+    return $resource(comm.url + '/tareas/texto', {
+          
+        }, {        
         'queryByTexto': {
             method: 'GET',
             isArray: true
@@ -23,3 +27,13 @@ module.factory('tareasResource', function ($resource, comm) {
     });
 });
 
+module.factory('searchByCategoriaResource', function ($resource, comm) {
+    return $resource(comm.url + '/tareas/categoria', {
+          
+        }, {        
+        'queryByCategoria': {
+            method: 'GET',
+            isArray: true
+        }
+    });
+});

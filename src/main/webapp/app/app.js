@@ -6,7 +6,8 @@ var module = angular.module('mpApp', [
     'mpApp.public',
     'oc.lazyLoad',
     'angular-loading-bar',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.bootstrap.datetimepicker'
 ]);
 
 module.config(function ($locationProvider, $stateProvider) {

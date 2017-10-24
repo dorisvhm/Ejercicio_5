@@ -64,7 +64,7 @@ public class TareaEndpoint {
     }
 
     @GET
-    @Path("/categoria/{idCategoria:[0-9][0-9]*}")
+    @Path("/categoria")
     public List<Tarea> listByIdCategoria(@QueryParam("idCategoria") Integer idCategoria) {
 
         final List<Tarea> results = tareasService.listByCategoria(idCategoria);
@@ -72,9 +72,8 @@ public class TareaEndpoint {
     }
 
     @GET
-    @Path("/texto/{texto}")
+    @Path("/texto")
     public List<Tarea> listByTexto(@QueryParam("texto") String texto) {
-
         final List<Tarea> results = tareasService.listByTexto(texto);
         return results;
     }

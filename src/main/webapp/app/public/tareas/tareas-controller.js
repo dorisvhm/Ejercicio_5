@@ -5,15 +5,15 @@ module.controller('getCategoriasController', function ($scope) {
 
 });
 
-module.controller('searchTareasController', function ($scope, $log, tareasResource, $uibModal) {
+module.controller('searchTareasController', function ($scope, $log, tareasResource, searchByTextoResource, searchByCategoriaResource, $uibModal) {
     var pc = this;
+    
     pc.textoBusqueda;
-
+    
     $scope.listaCategorias = [{llave: "1", valor: "TAREAS DOMESTICAS"}, {llave: "2", valor: "JAVA"}, {llave: "3", valor: "SISTEMAS OPERATIVOS"}];
 
     pc.tareas = [];
-    
-    pc.tarea = [];
+
 
     pc.search = function () {
 
@@ -26,6 +26,8 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
         var errorCallback = function (responseHeaders) {
             $log.info('search error ' + responseHeaders);
         };
+        
+         pc.textoBusqueda = "";
 
         tareasResource.queryAll({"max": 100}, successCallback, errorCallback);
     };
@@ -42,11 +44,13 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
             $log.info('search error ' + responseHeaders);
         };
 
-        tareasResource.queryByCategoria({"idCategoria": categoria.llave}, successCallback, errorCallback);
+        searchByCategoriaResource.queryByCategoria({"idCategoria": categoria.llave}, successCallback, errorCallback);
     };
 
     pc.searchByTexto = function ()
-    {
+    {        
+        $log.info('Texto a buscar... ' + pc.textoBusqueda);
+        
         var successCallback = function (data, responseHeaders) {
             pc.tareas = data;
         };
@@ -54,10 +58,8 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
         var errorCallback = function (responseHeaders) {
             $log.info('search error ' + responseHeaders);
         };
-
-        $log.info('Texto a buscar... ' + searchByTexto);
-
-        tareasResource.queryByTexto({"texto": texto}, successCallback, errorCallback);
+        
+        searchByTextoResource.queryByTexto({"texto": pc.textoBusqueda}, successCallback, errorCallback);
 
     };
 
@@ -90,9 +92,27 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
             controllerAs: pc,
             controller: function ($scope, $uibModalInstance) {
 
-                $scope.descripcio = pc.tarea.descripcion;
+                $scope.tarea = pc.tarea;
+                $scope.descrip = $scope.tarea.descripcion;
+                $scope.actualizar = function (descrip) {
 
-                $scope.cancel = function () {
+                    $scope.tarea.descripcion = descrip;
+                    var successCallback = function (data, responseHeaders) {
+                        $log.info('updating successfuly ' + data);
+
+                    };
+
+                    var errorCallback = function (responseHeaders) {
+                        $log.error('error while persisting');
+                    };
+
+                    tareasResource.update($scope.tarea, successCallback, errorCallback)
+
+                    $uibModalInstance.dismiss('cancel');
+                };
+
+                $scope.cerrar = function () {
+
                     $uibModalInstance.dismiss('cancel');
                 };
 
@@ -100,10 +120,7 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
             }
         });
     };
-
-
-
-    pc.search();
+    
 });
 
 
@@ -134,6 +151,17 @@ module.controller('newTareasController', function ($scope, $log, $location, tare
 
     $scope.cancel = function () {
         $location.path('/tareas');
+    };
+    
+   
+
+    $scope.isOpen = false;
+
+    $scope.openCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $scope.isOpen = true;
     };
 
 });
