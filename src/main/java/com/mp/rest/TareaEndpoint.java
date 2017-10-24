@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import com.mp.model.Tarea;
 import javax.inject.Inject;
-import javax.ws.rs.PathParam;
 
 /**
  *

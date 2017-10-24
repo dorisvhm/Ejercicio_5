@@ -15,6 +15,17 @@ module.factory('tareasResource', function ($resource, comm) {
     });
 });
 
+module.factory('categoriasResource', function ($resource, comm) {
+    return $resource(comm.url + '/categorias', {
+          
+        }, {
+        'queryAll': {
+            method: 'GET',
+            isArray: true
+        }
+    });
+});
+
 
 module.factory('searchByTextoResource', function ($resource, comm) {
     return $resource(comm.url + '/tareas/texto', {

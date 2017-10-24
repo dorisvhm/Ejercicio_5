@@ -36,6 +36,7 @@ public class Tarea implements Serializable {
     @Column
     private Integer idCategoria;
 
+    @Column
     private String categoria;
 
     public Integer getId() {
@@ -110,27 +111,15 @@ public class Tarea implements Serializable {
     public void setFechaLimite(Date fechaLimite) {
         this.fechaLimite = fechaLimite;
     }
-
-    public String getCategoria() {
-
-        switch (idCategoria) {
-            case 1:
-                categoria = "TAREAS DOMESTICAS";
-                break;
-            case 2:
-                categoria = "JAVA";
-                break;
-            case 3:
-                categoria = "SISTEMAS OPERATIVOS";
-                break;
-        }
-
-        return categoria;
-    }
-
+    
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    public String getCategoria() {
+        return categoria;
+    }   
+    
 
     @Override
     public String toString() {

@@ -2,18 +2,15 @@ package com.mp.model;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-public class Tarea implements Serializable {
+public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -24,20 +21,7 @@ public class Tarea implements Serializable {
     @Column(length = 100)
     private String nombre;
 
-    @Column
-    private Boolean realizada;
-
-    @Column(length = 1000)
-    private String descripcion;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaLimite;
-
-    @Column
-    private Integer idCategoria;
-
-    private String categoria;
-
+    
     public Integer getId() {
         return this.id;
     }
@@ -45,16 +29,17 @@ public class Tarea implements Serializable {
     public void setId(final Integer id) {
         this.id = id;
     }
+    
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Tarea)) {
+        if (!(obj instanceof Categoria)) {
             return false;
         }
-        Tarea other = (Tarea) obj;
+        Categoria other = (Categoria) obj;
         if (id != null) {
             if (!id.equals(other.id)) {
                 return false;
@@ -77,60 +62,7 @@ public class Tarea implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Boolean getRealizada() {
-        return realizada;
-    }
-
-    public void setRealizada(Boolean realizada) {
-        this.realizada = realizada;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Date getFechaLimite() {
-        return fechaLimite;
-    }
-
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
-    public void setFechaLimite(Date fechaLimite) {
-        this.fechaLimite = fechaLimite;
-    }
-
-    public String getCategoria() {
-
-        switch (idCategoria) {
-            case 1:
-                categoria = "TAREAS DOMESTICAS";
-                break;
-            case 2:
-                categoria = "JAVA";
-                break;
-            case 3:
-                categoria = "SISTEMAS OPERATIVOS";
-                break;
-        }
-
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+    }    
 
     @Override
     public String toString() {

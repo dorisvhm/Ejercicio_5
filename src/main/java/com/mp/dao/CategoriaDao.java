@@ -6,55 +6,24 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import com.mp.model.Tarea;
+import com.mp.model.Categoria;
 
 /**
- * DAO for Tarea
+ * DAO for Categoria
  */
 @Stateless
-public class TareaDao {
+public class CategoriaDao {
 
     @PersistenceContext(unitName = "tarea-persistence-unit")
     private EntityManager em;
 
-    public void create(Tarea entity) {
+    public void create(Categoria entity) {
         em.persist(entity);
     }
-
-    public void deleteById(Integer id) {
-        Tarea entity = em.find(Tarea.class, id);
-        if (entity != null) {
-            em.remove(entity);
-        }
-    }
     
-
-    public Tarea update(Tarea entity) {
-        return em.merge(entity);
-    }
-
-    public List<Tarea> listAll(Integer startPosition, Integer maxResult) {
-        TypedQuery<Tarea> findAllQuery = em.createQuery("SELECT DISTINCT p FROM Tarea p ORDER BY p.fechaLimite", Tarea.class);
-        if (startPosition != null) {
-            findAllQuery.setFirstResult(startPosition);
-        }
-        if (maxResult != null) {
-            findAllQuery.setMaxResults(maxResult);
-        }
+    public List<Categoria> listAll() {
+        TypedQuery<Categoria> findAllQuery = em.createQuery("SELECT  p FROM Categoria p ORDER BY p.id", Categoria.class);       
         return findAllQuery.getResultList();
     }
-
-    public List<Tarea> listByCategoria(Integer idCategoria) {
-        TypedQuery<Tarea> findAllQuery = em.createQuery("SELECT p FROM Tarea p where p.idCategoria = :idCategoria ORDER BY p.fechaLimite", Tarea.class);
-        findAllQuery.setParameter("idCategoria", idCategoria);
-
-        return findAllQuery.getResultList();
-    }
-
-    public List<Tarea> listByTexto(String texto) {
-        TypedQuery<Tarea> findAllQuery = em.createQuery("SELECT p FROM Tarea p where p.nombre like :texto or p.descripcion like :texto ORDER BY p.fechaLimite", Tarea.class);
-        findAllQuery.setParameter("texto", "%" + texto + "%");
-
-        return findAllQuery.getResultList();
-    }
+   
 }

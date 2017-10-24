@@ -18,10 +18,14 @@
                             <td style="width: 7%">
                                 <button id="ok" name="ok" class="btn btn-success" ng-click="tareas.search()">Todas</button>
                             </td>
-                            <td style="width: 20%">
+                            <td style="width: 10%">
                                 <a id="new" ui-sref="public.tareas.new" class="btn btn-primary">
-                                    Nueva tarea
+                                    Nueva Tarea
                                 </a>
+                            </td>                            
+                            <td style="width: 5%">
+                               <button type="button" class="btn btn-primary" ng-click="tareas.openCategoria()">
+                                   Nueva Categoria</button>
                             </td>
                         </tr>
                     </table>
@@ -34,12 +38,12 @@
                     <br/>
                     <br/>
                     <div> 
-                        <ul ng-repeat="cat in listaCategorias">                                       
-                            <button id="okCat" name="okcat" class="btn btn-primary" style="width: 200px;" ng-click="tareas.searchByCategory(cat)">{{cat.valor}}</button>
+                        <ul ng-repeat="cat in tareas.categorias">                                       
+                            <button id="okCat" name="okcat" class="btn btn-primary" style="width: 200px;" ng-click="tareas.searchByCategory(cat)">{{cat.nombre}}</button>
                         </ul>       
                     </div>
                 </td>
-                <td style="width: 75%">                    
+                <td style="width: 75%; vertical-align: top;">                    
                     <br/>
                     <br/>
                     <div id="demo">
@@ -59,7 +63,6 @@
                                 <td>{{t.fechaLimite| date : "dd/MM/yyyy hh:mm a"}}</td>
                                 <td>{{t.categoria}}</td>
                                 <td><button type="button" class="btn btn-primary" ng-click="tareas.open(t)">Detalle</button></td>
-                                
                             </tr>
                         </table>
                     </div>  

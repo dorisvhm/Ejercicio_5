@@ -45,7 +45,7 @@
                 <div class="col-md-4">     
 
                     <select name="multipleSelect" id="multipleSelect" ng-model="categoriaSelected"  single class="form-control input-md"
-                            ng-options="cat.llave as cat.valor for cat in categorias">
+                            ng-options="cat as cat.nombre for cat in categorias">
                     </select>   
                 </div>
             </div>

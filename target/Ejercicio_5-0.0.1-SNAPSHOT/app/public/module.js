@@ -10,8 +10,9 @@ module.config(function ($urlRouterProvider, $stateProvider) {
     $stateProvider.state('public', {
         abstract: true,
         data: {
-            title: 'MP Enterprise'
+            title: 'MP Enterprise',            
         }
+        
     });
 
 
@@ -44,6 +45,7 @@ module.config(function ($urlRouterProvider, $stateProvider) {
         }
 
     });
+    
 
     $stateProvider.state('public.tareas.search.texto', {
         url: '/search/:texto'
