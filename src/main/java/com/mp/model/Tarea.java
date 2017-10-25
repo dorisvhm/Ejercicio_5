@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,11 +35,8 @@ public class Tarea implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaLimite;
 
-    @Column
-    private Integer idCategoria;
-
-    @Column
-    private String categoria;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Categoria categoria;
 
     public Integer getId() {
         return this.id;
@@ -100,26 +99,17 @@ public class Tarea implements Serializable {
         return fechaLimite;
     }
 
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
     public void setFechaLimite(Date fechaLimite) {
         this.fechaLimite = fechaLimite;
     }
-    
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }   
-    
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
     @Override
     public String toString() {

@@ -61,7 +61,7 @@
                                 <td>{{t.nombre}}</td>
                                 <td>{{t.descripcion}}</td>
                                 <td>{{t.fechaLimite| date : "dd/MM/yyyy hh:mm a"}}</td>
-                                <td>{{t.categoria}}</td>
+                                <td>{{t.categoria.nombre}}</td>
                                 <td><button type="button" class="btn btn-primary" ng-click="tareas.open(t)">Detalle</button></td>
                             </tr>
                         </table>

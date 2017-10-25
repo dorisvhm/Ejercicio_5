@@ -191,7 +191,7 @@ module.controller('newTareasController', function ($scope, $log, $location, tare
             $log.info('data: ' + data);
             if (data == '') {
                 $log.info('no encontro la categoria ' + data);
-                
+
                 var successCallback = function (data, responseHeaders) {
                     $log.info('se guardo la categoria' + data);
                     $scope.categoria = data;
@@ -237,8 +237,8 @@ module.controller('newTareasController', function ($scope, $log, $location, tare
 
         tareasResource.save($scope.tareas, successCallback, errorCallback);
 
-        $scope.tareas.idCategoria = $scope.categoria.id;
-        $scope.tareas.categoria = $scope.categoria.nombre;
+
+        $scope.tareas.categoria = $scope.categoria;
 
 
     }
