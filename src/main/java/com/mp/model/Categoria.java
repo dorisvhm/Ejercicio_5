@@ -2,10 +2,14 @@ package com.mp.model;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -21,7 +25,6 @@ public class Categoria implements Serializable {
     @Column(length = 100)
     private String nombre;
 
-    
     public Integer getId() {
         return this.id;
     }
@@ -29,7 +32,9 @@ public class Categoria implements Serializable {
     public void setId(final Integer id) {
         this.id = id;
     }
-    
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Tarea> tareasList;
 
     @Override
     public boolean equals(Object obj) {
@@ -62,7 +67,15 @@ public class Categoria implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }    
+    }
+
+    public List<Tarea> getTareasList() {
+        return tareasList;
+    }
+
+    public void setTareasList(List<Tarea> tareasList) {
+        this.tareasList = tareasList;
+    }
 
     @Override
     public String toString() {

@@ -19,6 +19,7 @@ public class CategoriaDao {
 
     public void create(Categoria entity) {
         em.persist(entity);
+        em.flush();
     }
     
     public List<Categoria> listAll() {

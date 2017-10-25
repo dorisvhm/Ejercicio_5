@@ -206,8 +206,14 @@ module.controller('newTareasController', function ($scope, $log, $location, tare
 
                 categoriasResource.save($scope.categoria, successCallback, errorCallback);
             } else {
-                $scope.categoria = data;
+                
+                $scope.cats = data;
+                
+                $scope.categoria = $scope.cats[0];
 
+                $log.info('$scope.categoria.nombre' + $scope.categoria.id);
+                $log.info('$scope.categoria.nombre' + $scope.categoria.nombre);
+                
                 $scope.saveTarea();
 
             }
@@ -235,10 +241,12 @@ module.controller('newTareasController', function ($scope, $log, $location, tare
             $log.error('error while persisting');
         };
 
+        $scope.tareas.idCategoria = $scope.categoria.id;
+        $scope.tareas.categoria = $scope.categoria.nombre;
+
         tareasResource.save($scope.tareas, successCallback, errorCallback);
 
 
-        $scope.tareas.categoria = $scope.categoria;
 
 
     }
