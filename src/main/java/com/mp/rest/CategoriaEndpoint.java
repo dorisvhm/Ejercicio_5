@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import com.mp.model.Categoria;
 import javax.inject.Inject;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -39,5 +40,13 @@ public class CategoriaEndpoint {
         final List<Categoria> results = categoriasService.listAll();
         return results;
     }    
+    
+    @GET
+    @Path("/categoria")
+    public List<Categoria> listByNombreCategoria(@QueryParam("nombre") String nombre) {
+
+        final List<Categoria> results = categoriasService.listByNombreCategoria(nombre);
+        return results;
+    }
     
 }

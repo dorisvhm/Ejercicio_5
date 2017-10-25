@@ -25,5 +25,12 @@ public class CategoriaDao {
         TypedQuery<Categoria> findAllQuery = em.createQuery("SELECT  p FROM Categoria p ORDER BY p.id", Categoria.class);       
         return findAllQuery.getResultList();
     }
+    
+    public List<Categoria> listByNombreCategoria(String nombre) {
+        TypedQuery<Categoria> findAllQuery = em.createQuery("SELECT p FROM Categoria p where p.nombre = :nombre ", Categoria.class);
+        findAllQuery.setParameter("nombre", nombre);
+
+        return findAllQuery.getResultList();
+    }
    
 }

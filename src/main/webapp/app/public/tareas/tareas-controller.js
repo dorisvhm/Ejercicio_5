@@ -147,6 +147,7 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
 
                     var successCallback = function (data, responseHeaders) {
                         $log.info('save successfuly ' + data);
+                        pc.searchCategorias();
 
                     };
 
@@ -160,7 +161,7 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
                 };
 
                 $scope.cerrar = function () {
-                    pc.searchCategorias();
+
                     $uibModalInstance.dismiss('cancel');
                 };
 
@@ -168,7 +169,7 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
             }
         });
 
-        pc.searchCategorias();
+
     };
 
     pc.searchCategorias();
@@ -177,23 +178,56 @@ module.controller('searchTareasController', function ($scope, $log, tareasResour
 });
 
 
-module.controller('newTareasController', function ($scope, $log, $location, tareasResource, categoriasResource) {
+module.controller('newTareasController', function ($scope, $log, $location, tareasResource, categoriasResource, categoriasByNombreResource) {
     $scope.location = $location.path();
     $scope.tareas = {};
     $scope.categorias = [];
-    
-
+    $scope.categoria = {};
 
     $scope.save = function () {
 
-        $scope.tareas.idCategoria = $scope.categoriaSelected.id;
-        $scope.tareas.categoria = $scope.categoriaSelected.nombre;
-        
-        $log.info('$scope.categoriaSelected.id ' +  $scope.categoriaSelected.id);        
-        $log.info('$scope.tareas.categoria ' +  $scope.categoriaSelected.nombre);
+        var successCallback = function (data, responseHeaders) {
+
+            $log.info('data: ' + data);
+            if (data == '') {
+                $log.info('no encontro la categoria ' + data);
+                
+                var successCallback = function (data, responseHeaders) {
+                    $log.info('se guardo la categoria' + data);
+                    $scope.categoria = data;
+
+                    $scope.saveTarea();
+
+                };
+
+                var errorCallback = function (responseHeaders) {
+                    $log.error('error while persisting');
+                };
+
+                categoriasResource.save($scope.categoria, successCallback, errorCallback);
+            } else {
+                $scope.categoria = data;
+
+                $scope.saveTarea();
+
+            }
+
+        };
+
+        var errorCallback = function (responseHeaders) {
+
+            $log.error('error while persisting');
+        };
+
+        categoriasByNombreResource.queryByNombre({"nombre": $scope.categoria.nombre}, successCallback, errorCallback);
+
+    };
+
+
+    $scope.saveTarea = function () {
 
         var successCallback = function (data, responseHeaders) {
-            $log.info('saved successfuly ' + data);
+            $log.info('saved tarea successfuly ' + data);
             $location.path('/tareas');
         };
 
@@ -203,8 +237,11 @@ module.controller('newTareasController', function ($scope, $log, $location, tare
 
         tareasResource.save($scope.tareas, successCallback, errorCallback);
 
-    };
+        $scope.tareas.idCategoria = $scope.categoria.id;
+        $scope.tareas.categoria = $scope.categoria.nombre;
 
+
+    }
 
     $scope.cancel = function () {
         $location.path('/tareas');

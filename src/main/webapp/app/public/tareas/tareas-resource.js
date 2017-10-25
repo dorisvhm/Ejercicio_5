@@ -26,6 +26,17 @@ module.factory('categoriasResource', function ($resource, comm) {
     });
 });
 
+module.factory('categoriasByNombreResource', function ($resource, comm) {
+    return $resource(comm.url + '/categorias/categoria', {
+          
+        }, {
+        'queryByNombre': {
+            method: 'GET',
+            isArray: true
+        }
+    });
+});
+
 
 module.factory('searchByTextoResource', function ($resource, comm) {
     return $resource(comm.url + '/tareas/texto', {

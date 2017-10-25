@@ -44,9 +44,8 @@
                 <label class="col-md-4 control-label" for="fecha">Categoría:</label>  
                 <div class="col-md-4">     
 
-                    <select name="multipleSelect" id="multipleSelect" ng-model="categoriaSelected"  single class="form-control input-md"
-                            ng-options="cat as cat.nombre for cat in categorias">
-                    </select>   
+                    <input name="nombreCat" ng-model="categoria.nombre" placeholder="nombre Categoria" class="form-control input-md" required="" type="text" />
+                    
                 </div>
             </div>
             <!-- Button (Double) -->
