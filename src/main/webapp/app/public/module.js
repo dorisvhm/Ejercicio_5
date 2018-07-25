@@ -2,7 +2,7 @@
 var module = angular.module('mpApp.public', ['mpApp.ui', 'ui.router', 'ngResource']);
 
 module.constant('comm', {
-    url: '/Ejercicio_5/rest'
+    url: '/proyectoFinal/rest'
 });
 
 module.config(function ($urlRouterProvider, $stateProvider) {
@@ -16,52 +16,76 @@ module.config(function ($urlRouterProvider, $stateProvider) {
     });
 
 
-    $stateProvider.state('public.tareas', {
-        url: '/tareas',
+    $stateProvider.state('public.eventos', {
+        url: '/eventos',
         data: {
-            title: 'Tareas'
+            title: 'Eventos'
         },
         views: {
             "root@app": {
-                templateUrl: 'app/public/tareas/search.html',
-                controller: 'searchTareasController'
+                templateUrl: 'app/public/eventos/search.html',
+                controller: 'searchEventosController'
             }
         },
         resolve: {
             searchPostFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load(['app/public/tareas/tareas-controller.js',
-                    'app/public/tareas/tareas-resource.js']);
+                return $ocLazyLoad.load(['app/public/eventos/eventos-controller.js',
+                    'app/public/eventos/eventos-resource.js']);
             }
         },
     });
 
-    $stateProvider.state('public.tareas.new', {
+    $stateProvider.state('public.eventos.new', {
         url: '/new',
         views: {
             "root@app": {
-                templateUrl: 'app/public/tareas/detail.html',
-                controller: 'newTareasController'
+                templateUrl: 'app/public/eventos/detail.html',
+                controller: 'newEventosController'
             }
         }
 
     });
     
 
-    $stateProvider.state('public.tareas.search.texto', {
+    $stateProvider.state('public.eventos.search.texto', {
         url: '/search/:texto'
     });
 
 
-    $stateProvider.state('public.tareas.search.texto', {
+    $stateProvider.state('public.eventos.search.texto', {
         url: '/search/:texto',
         views: {
             "root@app": {
-                templateUrl: 'app/public/tareas/search.html',
-                controller: 'searchTareasController'
+                templateUrl: 'app/public/eventos/search.html',
+                controller: 'searchEventosController'
             }
         }
 
     });
+    
+    $stateProvider.state('public.personas',{
+            url: '/personas',
+            data:{
+                title: 'Personas'
+            },
+            component: 'personasComponent',
+            lazyLoad: function ($transition$) {
+                    return $transition$.injector().get('$ocLazyLoad').load(['app/public/personas/personas-component.js',
+                    'app/public/personas/personas-resource.js',]);
+            }
+        });
+        
+        $stateProvider.state('public.nuevoEvento',{
+            url: '/nuevoEvento',
+            data:{
+                title: 'Persona'
+            },
+            component: 'nuevaPersonaComponent',
+            lazyLoad: function ($transition$) {
+                    return $transition$.injector().get('$ocLazyLoad').load(['app/public/personas/nueva-persona-components.js',
+                    'app/public/personas/personas-resource.js',]);
+            }
+        });
 
 
 });

@@ -1,0 +1,61 @@
+<div ng-controller="searchEventosController as eventos"> 
+    <!-- Button (Double) -->    
+    <div class="form-group">
+        <table style="width: 100%">
+            <tr>
+                <td colspan="2">
+            <center>
+                <div>
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="width: 70%">
+                                <input style="width: 99%" type="text" placeholder="Ingrese nombre de evento o descripción" class="form-control input-md"
+                                       ng-model="eventos.textoBusqueda">
+                            </td>
+                            <td style="width: 7%">
+                                <button id="ok" name="ok" class="btn btn-success" ng-click="eventos.searchByTexto()">Buscar</button>
+                            </td>
+                            <td style="width: 7%">
+                                <button id="ok" name="ok" class="btn btn-success" ng-click="eventos.search()">Todos</button>
+                            </td>
+                            <td style="width: 10%">
+                                <a id="new" ui-sref="public.eventos.new" class="btn btn-primary">
+                                    Nuevo Evento
+                                </a>
+                            </td>                            
+                           
+                        </tr>
+                    </table>
+                </div>
+            </center>
+            </td>
+            </tr>
+            <tr>
+               
+                <td style="width: 100%; vertical-align: top;">                    
+                    <br/>
+                    <br/>
+                    <div id="demo">
+                        <table class="table" style="width: 100%">
+                            <tr>
+                                <th>Autorizado</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Fecha y Hora</th>
+                                <th>Lugar</th>
+                                 <th></th>
+                            </tr>
+                            <tr ng-repeat="t in eventos.eventos">
+                                <td><input type="checkbox" ng-model="t.autorizada" ng-change="eventos.update(t)"></td>
+                                <td>{{t.nombre}}</td>
+                                <td>{{t.descripcion}}</td>
+                                <td>{{t.fecha| date : "dd/MM/yyyy hh:mm a"}}</td>
+                                <td>{{t.lugar}}</td>
+                                <td><button type="button" class="btn btn-primary" ng-click="eventos.open(t)">Detalle</button></td>
+                            </tr>
+                        </table>
+                    </div>  
+                <td>
+            </tr>
+        </table>
+    </div> </div>

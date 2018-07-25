@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.nabenik</groupId>
-    <artifactId>Ejercicio_5</artifactId>
+    <artifactId>proyectoFinal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Ejercicio_5</name>
+    <name>proyectoFinal</name>
     <url>http://maven.apache.org</url>
 
     <properties>

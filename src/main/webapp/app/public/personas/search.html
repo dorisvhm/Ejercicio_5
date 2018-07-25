@@ -1,0 +1,60 @@
+
+    <!-- Button (Double) -->    
+    <div class="form-group">
+        <table style="width: 100%">
+            <tr>
+                <td colspan="2">
+            <center>
+                <div>
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="width: 70%">
+                                <input style="width: 99%" type="text" placeholder="Ingrese nombre de evento o descripción" class="form-control input-md"
+                                       ng-model="$ctrl.textoBusqueda">
+                            </td>
+                            <td style="width: 7%">
+                                <button id="ok" name="ok" class="btn btn-success" ng-click="$ctrl.searchByTexto()">Buscar</button>
+                            </td>
+                            <td style="width: 7%">
+                                <button id="ok" name="ok" class="btn btn-success" ng-click="$ctrl.search()">Todos</button>
+                            </td>
+                            <td style="width: 10%">
+                                <a id="new" ui-sref="public.nuevoEvento" class="btn btn-primary">
+                                    Nuevo Evento
+                                </a>
+                            </td>                            
+                           
+                        </tr>
+                    </table>
+                </div>
+            </center>
+            </td>
+            </tr>
+            <tr>
+               
+                <td style="width: 100%; vertical-align: top;">                    
+                    <br/>
+                    <br/>
+                    <div id="demo">
+                        <table class="table" style="width: 100%">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Email</th>
+                                <th>Identificacion</th>
+                                
+                            </tr>
+                            <tr ng-repeat="t in $ctrl.personas">
+                               
+                                <td>{{t.nombre}}</td>
+                                <td>{{t.apellido}}</td>
+                                <td>{{t.email}}</td>
+                                <td>{{t.identificacion}}</td>
+                                
+                            </tr>
+                        </table>
+                    </div>  
+                <td>
+            </tr>
+        </table>
+    </div>
